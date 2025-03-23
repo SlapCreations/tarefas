@@ -1,207 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeOut {
+            from {opacity: 1;}
+            to {opacity: 0;}
+        }
+        .fadeOut {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+        .line-through {
+            text-decoration-line: line-through;
+            text-decoration-color: #4a5568;
+            color: #9ca3af;
+            transition: text-decoration 0.3s ease;
+        }
+        .todo-item {
+            transition: all 0.3s ease;
+        }
+        .todo-item.shadow-on-complete {
+            shadow: md;
+        }
+        .completed {
+            @apply bg-blue-50;
+        }
+    </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Todo List App&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fadeOut {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>from {opacity: 1;}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>to {opacity: 0;}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.fadeOut {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation: fadeOut 0.3s ease-out forwards;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.line-through {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration-line: line-through;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration-color: #4a5568;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #9ca3af;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: text-decoration 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.todo-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.todo-item.shadow-on-complete {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>shadow: md;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.completed {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>@apply bg-blue-50;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="bg-gray-50 min-h-screen p-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-3xl font-bold text-gray-800 text-center mb-2"&gt;Todo List&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-500 text-center text-sm"&gt;Organize your tasks with style&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex gap-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>type="text"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id="todoInput"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>class="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>placeholder="What needs to be done?"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id="addButton"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>class="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>Add Task</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;ul id="todoList" class="space-y-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Todo items will be added here --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mt-6 text-sm text-gray-500 text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="remainingTasks"&gt;0 tasks remaining&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const todoInput = document.getElementById('todoInput');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const addButton = document.getElementById('addButton');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const todoList = document.getElementById('todoList');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const remainingTasks = document.getElementById('remainingTasks');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>addButton.addEventListener('click', addTodo);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>todoInput.addEventListener('keypress', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (e.key === 'Enter') addTodo();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function addTodo() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const text = todoInput.value.trim();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (text) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>createTodoItem(text);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>updateRemainingTasks();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>todoInput.value = '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function createTodoItem(text) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const li = document.createElement('li');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>li.className = 'todo-item flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:shadow-md transition-all group';</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const todoContent = `</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center gap-3 flex-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type="checkbox"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 cursor-pointer"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>onchange="toggleComplete(this)"</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-gray-700 flex-1 text-sm font-medium"&gt;${text}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>class="p-2 text-gray-400 hover:text-blue-500 transition-colors"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>onclick="editTodo(this.closest('li').querySelector('span'))"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>aria-label="Edit task"</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-4m0 0v-5a2 2 0 002 2h6a2 2 0 002-2V7a2 2 0 00-2-2h-6a2 2 0 00-2 2v5m0 0l-6 8h16l-6-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>class="p-2 text-gray-400 hover:text-red-500 transition-colors"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>onclick="deleteTodo(this.closest('li'))"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>aria-label="Delete task"</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>li.innerHTML = todoContent;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>todoList.appendChild(li);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function toggleComplete(checkbox) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const todoText = checkbox.nextElementSibling;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const todoItem = checkbox.closest('li');</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (todoText) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>todoText.classList.toggle('line-through');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (checkbox.checked) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>todoText.classList.add('bg-blue-50');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>todoText.classList.remove('bg-blue-50');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (checkbox.checked) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>todoItem.classList.add('completed');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>todoItem.classList.remove('completed');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>updateRemainingTasks();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function editTodo(textElement) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const text = textElement.textContent;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const input = document.createElement('input');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.type = 'text';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.value = text;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.className = 'w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500';</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.addEventListener('keypress', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (e.key === 'Enter') {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>saveEdit(input, textElement);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.addEventListener('blur', function() {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>saveEdit(input, textElement);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>textElement.replaceWith(input);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.focus();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function saveEdit(input, textElement) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const newText = input.value.trim();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (newText) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>textElement.textContent = newText;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>textElement.replaceWith(input);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function deleteTodo(todoItem) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>todoItem.classList.add('fadeOut');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>todoItem.remove();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>updateRemainingTasks();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, 300);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function updateRemainingTasks() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const tasks = todoList.querySelectorAll('li');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const completed = Array.from(tasks).filter(task =&gt; task.querySelector('input[type="checkbox"]:checked'));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>remainingTasks.textContent = `${tasks.length - completed.length} tasks remaining`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<body class="bg-gray-50 min-h-screen p-8">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">Todo List</h1>
+            <p class="text-gray-500 text-center text-sm">Organize your tasks with style</p>
+        </div>
+
+        <div class="mb-6">
+            <div class="flex gap-2">
+                <input 
+                    type="text" 
+                    id="todoInput" 
+                    class="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                    placeholder="What needs to be done?"
+                >
+                <button 
+                    id="addButton" 
+                    class="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg"
+                >
+                    Add Task
+                </button>
+            </div>
+        </div>
+
+        <ul id="todoList" class="space-y-3">
+            <!-- Todo items will be added here -->
+        </ul>
+
+        <div class="mt-6 text-sm text-gray-500 text-center">
+            <span id="remainingTasks">0 tasks remaining</span>
+        </div>
+    </div>
+
+    <script>
+        const todoInput = document.getElementById('todoInput');
+        const addButton = document.getElementById('addButton');
+        const todoList = document.getElementById('todoList');
+        const remainingTasks = document.getElementById('remainingTasks');
+
+        addButton.addEventListener('click', addTodo);
+        todoInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTodo();
+        });
+
+        function addTodo() {
+            const text = todoInput.value.trim();
+            if (text) {
+                createTodoItem(text);
+                updateRemainingTasks();
+                todoInput.value = '';
+            }
+        }
+
+        function createTodoItem(text) {
+            const li = document.createElement('li');
+            li.className = 'todo-item flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:shadow-md transition-all group';
+            
+            const todoContent = `
+                <div class="flex items-center gap-3 flex-1">
+                    <input 
+                        type="checkbox" 
+                        class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 cursor-pointer"
+                        onchange="toggleComplete(this)"
+                    >
+                    <span class="text-gray-700 flex-1 text-sm font-medium">${text}</span>
+                </div>
+                <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <button 
+                        class="p-2 text-gray-400 hover:text-blue-500 transition-colors"
+                        onclick="editTodo(this.closest('li').querySelector('span'))"
+                        aria-label="Edit task"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-4m0 0v-5a2 2 0 002 2h6a2 2 0 002-2V7a2 2 0 00-2-2h-6a2 2 0 00-2 2v5m0 0l-6 8h16l-6-8" />
+                        </svg>
+                    </button>
+                    <button 
+                        class="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                        onclick="deleteTodo(this.closest('li'))"
+                        aria-label="Delete task"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            `;
+
+            li.innerHTML = todoContent;
+            todoList.appendChild(li);
+        }
+
+        function toggleComplete(checkbox) {
+            const todoText = checkbox.nextElementSibling;
+            const todoItem = checkbox.closest('li');
+            
+            if (todoText) {
+                todoText.classList.toggle('line-through');
+                if (checkbox.checked) {
+                    todoText.classList.add('bg-blue-50');
+                } else {
+                    todoText.classList.remove('bg-blue-50');
+                }
+            }
+            
+            if (checkbox.checked) {
+                todoItem.classList.add('completed');
+            } else {
+                todoItem.classList.remove('completed');
+            }
+            
+            updateRemainingTasks();
+        }
+
+        function editTodo(textElement) {
+            const text = textElement.textContent;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = text;
+            input.className = 'w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500';
+            
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveEdit(input, textElement);
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                saveEdit(input, textElement);
+            });
+
+            textElement.replaceWith(input);
+            input.focus();
+        }
+
+        function saveEdit(input, textElement) {
+            const newText = input.value.trim();
+            if (newText) {
+                textElement.textContent = newText;
+                textElement.replaceWith(input);
+            }
+        }
+
+        function deleteTodo(todoItem) {
+            todoItem.classList.add('fadeOut');
+            setTimeout(() => {
+                todoItem.remove();
+                updateRemainingTasks();
+            }, 300);
+        }
+
+        function updateRemainingTasks() {
+            const tasks = todoList.querySelectorAll('li');
+            const completed = Array.from(tasks).filter(task => task.querySelector('input[type="checkbox"]:checked'));
+            remainingTasks.textContent = `${tasks.length - completed.length} tasks remaining`;
+        }
+    </script>
 </body>
 </html>
